@@ -5,8 +5,13 @@ import Modal from './Modal';
 
 function Todo(props) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
   function deleteHandler() {
     setModalIsOpen(true);
+  }
+
+  function closeModalHandoler() {
+    setModalIsOpen(false);
   }
 
   return (
@@ -17,8 +22,10 @@ function Todo(props) {
           Delete
         </button>
       </div>
-      {modalIsOpen && <Modal />}
-      {modalIsOpen && <Backdrop />}
+      {modalIsOpen && (
+        <Modal onCancel={closeModalHandoler} onConfirm={closeModalHandoler} />
+      )}
+      {modalIsOpen && <Backdrop onCancel={closeModalHandoler} />}
     </div>
   );
 }
