@@ -8,6 +8,21 @@ const FavoritesContext = createContext({
 function FavoritesContextPrivider(props) {
   const [userFavorites, setUserFavorites] = useState([]);
 
+  function addFavoritesHandler(fovoriteMeetup) {
+    // setUserFavorites(userFavorites.concat(fovoriteMeetup)); 非推奨
+    setUserFavorites((prevUseFavorites) => {
+      return prevUseFavorites.concat(fovoriteMeetup);
+    });
+  }
+  function removeFavoritesHandler(meetupId) {
+    setUserFavorites((prevUseFavorites) => {
+      return prevUseFavorites.filter((meetup) => meetupId.id !== meetupId);
+    });
+  }
+  function itemIsFavoritesHandler(meetupId) {
+    return userFavorites.some((meetup) => meetup.id === meetupId);
+  }
+
   const context = {
     favorites: userFavorites,
     totalFavorites: userFavorites.length,
